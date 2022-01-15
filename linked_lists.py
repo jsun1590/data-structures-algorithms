@@ -1,3 +1,6 @@
+from logging import root
+
+
 class Node(object):
     def __init__(self, data, next):
         self.data = data
@@ -13,7 +16,22 @@ class LinkedList(object):
         self.size += 1
     
     def pop(self, data):
-        raise NotImplementedError
+        curr = self.root
+        prev = None
+        while curr:
+            if curr.data == data:
+                if prev:
+                    prev.next = curr.next
+                    return True
+                else:
+                    self.root = curr.next
+                    curr = None
+                    return True
+            else:
+                prev = curr
+                curr = curr.next
+        return False
+
 
     def get_size(self):
         return self.size
@@ -46,3 +64,26 @@ class LinkedList(object):
             prev = curr
             curr = next
         self.root = prev
+    
+    def hasCycle(self):
+        tortoise = self.root
+        hare = self.root.next
+
+        while tortoise != hare:
+            if not hare.next:
+                return False
+            if not tortoise.next or not hare.next.next:
+                return False
+            tortoise = tortoise.next
+            hare = hare.next.next
+        return True
+
+
+a = LinkedList()
+a.add(1)
+a.add(3)
+a.add(4)
+a.reverse()
+a.pop(1)
+a.print()
+print(a.hasCycle())
