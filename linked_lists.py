@@ -19,10 +19,12 @@ class LinkedList(object):
             if curr.data == data:
                 if prev:
                     prev.next = curr.next
+                    self.size -= 1
                     return True
                 else:
                     self.root = curr.next
                     curr = None
+                    self.size -= 1
                     return True
             else:
                 prev = curr
@@ -72,8 +74,6 @@ class LinkedList(object):
             curr = curr.next
         curr.next = ptr
 
-
-    
     def hasCycle(self):
         tortoise = self.root
         hare = self.root.next
@@ -86,15 +86,3 @@ class LinkedList(object):
             tortoise = tortoise.next
             hare = hare.next.next
         return True
-
-
-a = LinkedList()
-a.add(1)
-a.add(2)
-a.add(3)
-a.add(4)
-a.add(5)
-a.reverse()
-print(a.print())
-a.makeCycle(2)
-print(a.hasCycle())
