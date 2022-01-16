@@ -1,6 +1,3 @@
-from logging import root
-
-
 class Node(object):
     def __init__(self, data, next):
         self.data = data
@@ -38,20 +35,20 @@ class LinkedList(object):
 
     def find(self, data):
         curr = self.root
-        prev = None
         while curr:
             if curr.data == data:
                 return data
             else:
-                prev = curr
                 curr = curr.next
         return False
 
     def print(self):
+        out = ""
         curr = self.root
         while curr:
-            print(curr.data)
+            out += str(curr.data) + "->"
             curr = curr.next
+        return out.rstrip("->")
 
     def reverse(self):
         prev = None
@@ -64,6 +61,18 @@ class LinkedList(object):
             prev = curr
             curr = next
         self.root = prev
+
+    def makeCycle(self, index):
+        curr_index = 0
+        curr = self.root
+        while curr.next:
+            if curr_index < index:
+                curr_index += 1
+                ptr = curr
+            curr = curr.next
+        curr.next = ptr
+
+
     
     def hasCycle(self):
         tortoise = self.root
@@ -81,9 +90,11 @@ class LinkedList(object):
 
 a = LinkedList()
 a.add(1)
+a.add(2)
 a.add(3)
 a.add(4)
+a.add(5)
 a.reverse()
-a.pop(1)
-a.print()
+print(a.print())
+a.makeCycle(2)
 print(a.hasCycle())
