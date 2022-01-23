@@ -5,14 +5,18 @@ class Node(object):
         self.right = None
 
 class BinaryTree(object):
-    def __init__(self, root):
-        self.root = Node(root)
+    def __init__(self, data):
+        self.root = Node(data)
     
     def print(self, type):
         if type == "preorder":
             return self.preorder(self.root).rstrip("-")
         elif type == "inorder":
             return self.inorder(self.root).rstrip("-")
+        elif type == "postorder":
+            return self.postorder(self.root).rstrip("-")
+        else:
+            return "Not found"
     
     def preorder(self, node, output = ""):
         if node:
@@ -27,4 +31,11 @@ class BinaryTree(object):
         output += str(node.data) + "-"
         if node.right:
             output = self.inorder(node.right, output)
+        return output
+    
+    def postorder(self, node, output = ""):
+        if node:
+            output = self.postorder(node.left, output)
+            output = self.postorder(node.right, output)
+            output += str(node.data) + "-"
         return output
