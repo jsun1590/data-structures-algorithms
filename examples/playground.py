@@ -1,4 +1,4 @@
-from binary_tree import Node, BinaryTree
+from ..data_structures.binary_tree import Node, BinaryTree
 
 '''
       1
