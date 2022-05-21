@@ -39,3 +39,11 @@ class BinaryTree(object):
             output = self.postorder(node.right, output)
             output += str(node.data) + "-"
         return output
+    
+    def invert(self, node):
+        if not node:
+            return
+        node.left, node.right = node.right, node.left
+        
+        self.invert(node.left)
+        self.invert(node.right)
