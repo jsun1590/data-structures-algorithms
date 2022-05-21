@@ -79,9 +79,7 @@ class LinkedList(object):
         hare = self.root.next
 
         while tortoise != hare:
-            if not hare.next:
-                return False
-            if not tortoise.next or not hare.next.next:
+            if not tortoise.next or not hare.next:
                 return False
             tortoise = tortoise.next
             hare = hare.next.next
